@@ -22,25 +22,9 @@
   },
   "type": "module",
   "types": "./dist/src/index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "*",
-        "dist/*",
-        "dist/src/*",
-        "dist/src/*/index"
-      ],
-      "src/*": [
-        "*",
-        "dist/*",
-        "dist/src/*",
-        "dist/src/*/index"
-      ]
-    }
-  },
   "files": [
     "src",
-    "dist",
+    "dist/src",
     "!dist/test",
     "!**/*.tsbuildinfo"
   ],
@@ -142,11 +126,13 @@
     ]
   },
   "scripts": {
+    "clean": "aegir clean",
     "lint": "aegir lint",
+    "dep-check": "aegir dep-check",
     "build": "aegir build",
     "test": "aegir test",
-    "test:node": "aegir test -t node",
-    "test:chrome": "aegir test -t browser",
+    "test:node": "aegir test -t node --cov",
+    "test:chrome": "aegir test -t browser --cov",
     "test:firefox": "aegir test -t browser -- --browser firefox",
     "release": "aegir release"
   },
@@ -166,6 +152,7 @@
     "wherearewe": "^2.0.1"
   },
   "devDependencies": {
+    "@libp2p/interfaces": "^3.0.3",
     "@types/hapi__hapi": "^20.0.9",
     "aegir": "^37.0.15",
     "go-ipfs": "^0.15.0",
@@ -173,12 +160,13 @@
     "ipfs-client": "^0.9.0",
     "ipfs-core-types": "^0.12.0",
     "ipfs-http-client": "^58.0.0",
+    "kubo-rpc-client": "^1.0.1",
     "util": "^0.12.4"
   },
   "browser": {
-    "./src/endpoint/server.js": "./src/endpoint/server.browser.js",
-    "./src/utils.js": "./src/utils.browser.js",
-    "./src/ipfsd-daemon.js": "./src/ipfsd-client.js",
+    "./dist/src/endpoint/server.js": "./dist/src/endpoint/server.browser.js",
+    "./dist/src/utils.js": "./dist/src/utils.browser.js",
+    "./dist/src/ipfsd-daemon.js": "./dist/src/ipfsd-client.js",
     "go-ipfs": false
   },
   "jsdelivr": "dist/index.min.js",
